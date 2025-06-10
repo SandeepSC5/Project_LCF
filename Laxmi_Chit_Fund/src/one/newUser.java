@@ -114,7 +114,7 @@ class NewUserDB extends newUser
 		   Class.forName("com.mysql.cj.jdbc.Driver");
 		   
 		   //second step :  connectivity to DB
-		   Connection con = DriverManager.getConnection("jdbc:Mysql://localhost:3306/fund","root","#tijori@#$80");
+		   Connection con = DriverManager.getConnection("jdbc:Mysql://localhost:3306/fund","root","#WWWWWW");
 		   
 		   //thirdstep : type the sql query
 		   
