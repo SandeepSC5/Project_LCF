@@ -126,8 +126,8 @@ class NewUserDB extends newUser
 		   
 		   PreparedStatement ps = con.prepareStatement(query);
 		  // PreparedStatement gs = con.prepareStatement("SELECT table_name FROM information_schema.tables WHERE table_schema = 'fund' AND table_name = '"+name+"';");
-		 // ResultSet rs = gs.executeQuery();
-		    int i = ps.executeUpdate();//this method works for insert create delete update. here i gives value in 0(failed) or 1(passed)
+
+		    int i = ps.executeUpdate();//this method works for insert create delete update. here i gave value in 0(failed) or 1(passed)
 		    if(i>=0)
 		    {
 		    	

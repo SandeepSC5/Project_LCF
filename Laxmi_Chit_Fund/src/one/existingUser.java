@@ -1,4 +1,3 @@
-//original package
 package one;
 import java.sql.*;
 
@@ -21,10 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.SystemColor;
-//import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-//import one.existingUser;
-
 import java.awt.Component;
 import java.awt.Color;
 import javax.swing.AbstractListModel;
@@ -71,10 +66,8 @@ public class existingUser extends JFrame
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	
+// created Frame	
 	public existingUser() 
 	{
 		setTitle("Existing User Entry form");
@@ -103,7 +96,7 @@ public class existingUser extends JFrame
 		lblNewLabel_2.setBounds(327, 84, 104, 26);
 		contentPane.add(lblNewLabel_2);
 		
-		//labels
+//labels
 		JLabel nameL = new JLabel("Name :");
 		nameL.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		nameL.setBounds(88, 141, 85, 13);
@@ -127,7 +120,7 @@ public class existingUser extends JFrame
 		String x[]= {"deepak", "surya"};
 		
 		
-		//textfields
+//textfields
 		emi = new JTextField();
 		emi.setBounds(245, 193, 104, 19);
 		contentPane.add(emi);
@@ -148,6 +141,8 @@ public class existingUser extends JFrame
 		contentPane.add(name);
 		name.setColumns(10);
 		
+//table to get the values from DB
+		
 		JList list = new JList();
 		list.setModel(new AbstractListModel() {
 			String[] values = new String[] {};
@@ -165,14 +160,18 @@ public class existingUser extends JFrame
 		JLabel nameLableList = new JLabel("Existing member List: ");
 		nameLableList.setBounds(475, 116, 140, 13);
 		contentPane.add(nameLableList);
+
+		
+//--------------------------------------------------------------------------------------------------------------------------------------				
+// when Get List pressed
+//will fetch existing user list from db
 		
 		JButton update_exisB = new JButton("Refresh List");
 		update_exisB.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-//--------------------------------------------------------------------------------------------------------------------------------------				
-				//getting existing user list from db
+
 				
 				ArrayList<String> sqllist = new ArrayList<>();
 				
@@ -182,28 +181,22 @@ public class existingUser extends JFrame
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				
 				//getting the connection
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/fund", "root", "#tijori@#$80");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost/fund", "root", "WWWWWWWW");
 				
 				//making query
 				PreparedStatement ps = con.prepareStatement("SELECT TABLE_NAME From INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'fund'");
 				
 				//-----------------------------------------------------------------------------------------
-				//Result set is used when we need the data: here select command will get us the data to store it result set is used
+				//Result set is used here as it will get the data
 				
 						ResultSet rs = ps.executeQuery();
-						int count=0, i = 0;
-						
-						// Declare and initialize an ArrayList of Strings
-						
-						//ArrayList<String> sqllist = new ArrayList<>();
-						
-						
+						int i = 0;
+		
 						while(rs.next())
 						{
 							
 							sqllist.add(rs.getString("TABLE_NAME"));
 							
-							count++;
 							i++;
 						}
 						
@@ -229,13 +222,8 @@ public class existingUser extends JFrame
 				
 				//JOptionPane.showMessageDialog(null, "Updated Successfully");
 				
-				
-				
-				
-				
-				
-				
-			table2 = new JTable();        //..................................1
+							
+			table2 = new JTable();        
 				table2.addMouseListener(new MouseAdapter() 
 				
 				{
@@ -248,20 +236,7 @@ public class existingUser extends JFrame
 						name.setText(tableName);
 						
 					}
-				});
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				});			
 			}
 		});
 		update_exisB.setBounds(475, 139, 104, 21);
@@ -275,7 +250,7 @@ public class existingUser extends JFrame
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(475, 170, 104, 215);
 		contentPane.add(scrollPane);
-		//--------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------
 		table2 = new JTable();
 		scrollPane.setViewportView(table2);
 		table2.setPreferredScrollableViewportSize(new Dimension(450, 400));
@@ -290,8 +265,9 @@ public class existingUser extends JFrame
 		
 		
 		
-	//--------------------------------------------------------------------------------------------------------------------
-		//here sending data to database
+//--------------------------------------------------------------------------------------------------------------------
+//here sending Existing user data to database to add the latest entry
+		
 		JButton submitExis = new JButton("Submit");
 		submitExis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -302,7 +278,6 @@ public class existingUser extends JFrame
 				//System.out.println("I am going for db now with: "+name.getText()+Integer.parseInt(emig)+Integer.parseInt(loang)+ tarik.getText());
 				
 				//sending it to db
-				
 				existingUser eU = new existingUser();
 				eU.ExisUserDB(name.getText(),Integer.parseInt(emig),Integer.parseInt(loang), tarik.getText());
 				
@@ -313,6 +288,8 @@ public class existingUser extends JFrame
 		
 			
 	}
+
+// Existing user new entry gets processed here
 	
 	void ExisUserDB(String name, int emi, int loan, String tarik)
 	{
@@ -322,7 +299,7 @@ public class existingUser extends JFrame
 			   Class.forName("com.mysql.cj.jdbc.Driver");
 			   
 			   //second step :  connectivity to DB
-			   Connection con = DriverManager.getConnection("jdbc:Mysql://localhost:3306/fund","root","#tijori@#$80");
+			   Connection con = DriverManager.getConnection("jdbc:Mysql://localhost:3306/fund","root","WWWWWWWW");
 			  
 			   //third step to form query
 			   String query = "insert into fund."+name+ " values(\""+tarik+"\", "+emi+", "+loan+")";
@@ -346,7 +323,6 @@ public class existingUser extends JFrame
 		}
 		catch(Exception e)
 		{
-			//write here
 			System.out.println(e);
 		}
 		
@@ -354,5 +330,5 @@ public class existingUser extends JFrame
 		
 		
 		
-	}
+}
 
